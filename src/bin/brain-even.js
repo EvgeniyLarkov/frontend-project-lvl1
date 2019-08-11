@@ -1,42 +1,26 @@
 #!/usr/bin/env node
 
-import readlineSync from 'readline-sync';
 import { greeting, askName } from '..';
+import { gameBody, getRandomInt, tryToWin } from '../core';
 
 greeting();
 
 const username = askName();
-const numOfCorrectAnswers = 3;
-const minVal = 0;
-const maxVal = 20;
 
 console.log('Answer "yes" if number even otherwise answer "no"');
 
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 const isEven = num => ((num % 2 === 0) ? 'yes' : 'no');
 
-function gameBody() {
-  const randomVal = getRandomInt(minVal, maxVal);
-  console.log(`Question: ${randomVal}`);
-  const getAnswer = readlineSync.question('Your answer: ');
+const gameProcess = (tryNum = 0) => {
+  if (tryNum >= tryToWin) {
+    return console.log(`Congratulations, ${username}`);
+  }
+  const randomVal = getRandomInt();
   const evenCheck = isEven(randomVal);
-  if (evenCheck === getAnswer) {
-    console.log('Correct!');
-    return true;
+  if (gameBody(evenCheck, randomVal, username)) {
+    return gameProcess(tryNum + 1);
   }
-  console.log(`${getAnswer} is wrong answer ;(. Correct answer was ${evenCheck}`);
-  console.log(`Let's try again, ${username}`);
-  return false;
-}
-
-const gameProcess = () => {
-  let numOfAnswers = 0;
-  while (numOfAnswers < numOfCorrectAnswers) {
-    if (gameBody()) {
-      numOfAnswers += 1;
-    }
-  }
-  console.log(`Congratulations, ${username}`);
+  return gameProcess(tryNum);
 };
 
 gameProcess();
