@@ -21,10 +21,10 @@ const makeProgression = (plength, pseed) => {
 };
 
 const generateData = () => {
-  const progLength = 9;
+  const progLength = 10;
   const progSeed = getRandomInt(1);
   const progression = makeProgression(progLength, progSeed);
-  const numberPos = getRandomInt(0, progLength);
+  const numberPos = getRandomInt(0, progLength - 1);
   const answer = progression[numberPos];
   const question = progression.map(val => ((val === answer) ? '..' : val)).join(' ');
   return [question, answer.toString()];
