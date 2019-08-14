@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-import { greeting, askName } from '..';
-import { gameBody, getRandomInt, tryToWin } from '../core';
+import { greeting } from '..';
+import { gameProcess, getRandomInt } from '../core';
 
-greeting();
-const username = askName();
-console.log('What is the result of the expression?');
+const rule = 'What is the result of the expression?';
+const username = greeting(rule);
 
 const mathSymb = [
   ['+', (var1, var2) => var1 + var2],
@@ -20,15 +19,4 @@ const generateData = () => {
   return [`${randomVal1} ${symbol} ${randomVal2}`, operation(randomVal1, randomVal2).toString()];
 };
 
-const gameProcess = (tryNum = 0) => {
-  if (tryNum >= tryToWin) {
-    return console.log(`Congratulations, ${username}`);
-  }
-  const [question, answer] = generateData();
-  if (gameBody(answer, question, username)) {
-    return gameProcess(tryNum + 1);
-  }
-  return false;
-};
-
-gameProcess();
+gameProcess(generateData, username);

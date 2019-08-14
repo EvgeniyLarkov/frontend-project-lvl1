@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-import { greeting, askName } from '..';
-import { gameBody, getRandomInt, tryToWin } from '../core';
+import { greeting } from '..';
+import { gameProcess, getRandomInt } from '../core';
 
-greeting();
-const username = askName();
-console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
+const rule = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const username = greeting(rule);
 
 const isPrime = (num) => {
   const numsqrt = Math.sqrt(num);
@@ -26,15 +25,4 @@ const generateData = () => {
   return [randomVal, isPrime(randomVal)];
 };
 
-const gameProcess = (tryNum = 0) => {
-  if (tryNum >= tryToWin) {
-    return console.log(`Congratulations, ${username}`);
-  }
-  const [question, answer] = generateData();
-  if (gameBody(answer, question, username)) {
-    return gameProcess(tryNum + 1);
-  }
-  return false;
-};
-
-gameProcess();
+gameProcess(generateData, username);
