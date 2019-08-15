@@ -1,7 +1,7 @@
 {
-  "name": "hexletmindgames",
+  "name": "hexletbraingames",
   "version": "1.0.0",
-  "description": "My first project",
+  "description": "hexlet brain games project",
   "main": "index.js",
   "bin": {
     "brain-games": "dist/bin/brain-games.js",
@@ -19,7 +19,11 @@
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build"
   },
-  "author": "",
+  "keywords": [
+    "educational",
+    "games"
+  ],
+  "author": "EvgeniyLarkov",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.5.5",

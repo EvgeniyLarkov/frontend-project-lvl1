@@ -1,4 +1,5 @@
 import readlineSync from 'readline-sync';
+import { greeting } from '.';
 
 const minVal = 0;
 const maxVal = 20;
@@ -17,15 +18,19 @@ const gameBody = (correctAnswer, question) => {
 };
 
 
-const gameProcess = (generateData, username, tryNum = 0) => {
-  if (tryNum >= tryToWin) {
-    return console.log(`Congratulations, ${username}`);
-  }
-  const [question, answer] = generateData();
-  if (gameBody(answer, question, username)) {
-    return gameProcess(generateData, username, tryNum + 1);
-  }
-  return console.log(`Let's try again, ${username}`);
+const gameProcess = (generateData, rule) => {
+  const username = greeting(rule);
+  const iter = (tryNum) => {
+    if (tryNum >= tryToWin) {
+      return console.log(`Congratulations, ${username}`);
+    }
+    const [question, answer] = generateData();
+    if (gameBody(answer, question)) {
+      return iter(tryNum + 1);
+    }
+    return console.log(`Let's try again, ${username}`);
+  };
+  return iter(0);
 };
 
 
