@@ -1,12 +1,13 @@
-import { getRandomInt } from '../core';
+import { gameProcess, getRandomInt } from '../core';
 
-const rule = 'Answer "yes" if number even otherwise answer "no"';
+const gameDescription = 'Answer "yes" if number even otherwise answer "no"';
 
-const isEven = num => ((num % 2 === 0) ? 'yes' : 'no');
+const isEven = num => (num % 2 === 0);
 
 const generateData = () => {
-  const randomVal = getRandomInt();
-  return [randomVal.toString(), isEven(randomVal)];
+  const question = getRandomInt();
+  const answer = (isEven(question)) ? 'yes' : 'no';
+  return [question.toString(), answer];
 };
 
-export { generateData, rule };
+export default () => gameProcess(generateData, gameDescription);

@@ -1,34 +1,40 @@
 import readlineSync from 'readline-sync';
-import { greeting } from '.';
 
 const minVal = 0;
 const maxVal = 20;
 const tryToWin = 3;
 
-const gameBody = (correctAnswer, question) => {
-  console.log(`Question: ${question}`);
-  const userAnswer = readlineSync.question('Your answer: ');
-
-  if (correctAnswer === userAnswer) {
-    console.log('Correct!');
-    return true;
-  }
-  console.log(`${userAnswer} is wrong answer ;(. Correct answer was ${correctAnswer}`);
-  return false;
+const greeting = (gameDescription) => {
+  console.log('Welcome to the Brain Games!');
+  console.log(gameDescription);
+  const username = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${username}`);
+  return username;
 };
 
-
-const gameProcess = (generateData, rule) => {
-  const username = greeting(rule);
+const gameProcess = (generateData, gameDescription) => {
+  const username = greeting(gameDescription);
   const iter = (tryNum) => {
     if (tryNum >= tryToWin) {
       return console.log(`Congratulations, ${username}`);
     }
     const [question, answer] = generateData();
-    if (gameBody(answer, question)) {
+    const gameBody = (gameQuestion, correctAnswer) => {
+      console.log(`Question: ${gameQuestion}`);
+      const userAnswer = readlineSync.question('Your answer: ');
+      if (correctAnswer === userAnswer) {
+        console.log('Correct!');
+        return true;
+      }
+      console.log(`${userAnswer} is wrong answer ;(. Correct answer was ${correctAnswer}`);
+      return false;
+    };
+
+    if (gameBody(question, answer)) {
       return iter(tryNum + 1);
     }
-    return console.log(`Let's try again, ${username}`);
+    console.log(`Let's try again, ${username}`);
+    return false;
   };
   return iter(0);
 };
@@ -39,4 +45,4 @@ const getRandomInt = (min = minVal, max = maxVal) => {
   return random;
 };
 
-export { gameProcess, getRandomInt };
+export { gameProcess, getRandomInt, greeting };

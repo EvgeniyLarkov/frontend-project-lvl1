@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { gameProcess } from '../core';
-import { generateData, rule } from '../games/brain-gcd';
+import gameProcess from '../games/brain-gcd';
 
-gameProcess(generateData, rule);
+gameProcess();

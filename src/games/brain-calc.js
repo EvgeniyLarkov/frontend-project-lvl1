@@ -1,18 +1,20 @@
-import { getRandomInt } from '../core';
+import { gameProcess, getRandomInt } from '../core';
 
-const rule = 'What is the result of the expression?';
+const gameDescription = 'What is the result of the expression?';
 
-const mathSymb = [
-  ['+', (var1, var2) => var1 + var2],
-  ['-', (var1, var2) => var1 - var2],
-  ['*', (var1, var2) => var1 * var2],
+const mathSigns = [
+  ['+', (a, b) => a + b],
+  ['-', (a, b) => a - b],
+  ['*', (a, b) => a * b],
 ];
 
 const generateData = () => {
-  const [symbol, operation] = mathSymb[getRandomInt(0, mathSymb.length - 1)];
+  const [sign, operation] = mathSigns[getRandomInt(0, mathSigns.length - 1)];
   const randomVal1 = getRandomInt();
   const randomVal2 = getRandomInt();
-  return [`${randomVal1} ${symbol} ${randomVal2}`, operation(randomVal1, randomVal2).toString()];
+  const question = `${randomVal1} ${sign} ${randomVal2}`;
+  const answer = operation(randomVal1, randomVal2).toString();
+  return [question, answer];
 };
 
-export { generateData, rule };
+export default () => gameProcess(generateData, gameDescription);
