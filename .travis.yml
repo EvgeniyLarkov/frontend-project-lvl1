@@ -8,7 +8,8 @@ script:
   - make lint
 
 notifications:
-        email:
-          - jlarkov@gmail.com
-        on_success: always
-        on_failure: always
+  email:
+    recipients:
+      - jlarkov@gmail.com
+    on_success: always
+    on_failure: always

@@ -1,14 +1,15 @@
-import { gameProcess, getRandomInt } from '../core';
+import processGame from '../core';
+import getRandomInt from '../utils';
 
 const gameDescription = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-const isPrime = (num) => {
+const isPrime = (number) => {
   const iter = (divider) => {
-    if (Math.sqrt(num) <= divider) {
-      return true;
-    }
-    if (num % divider === 0) {
+    if (number % divider === 0 && number !== 2) {
       return false;
+    }
+    if ((Math.sqrt(number) <= divider)) {
+      return true;
     }
     return iter(divider + 1);
   };
@@ -16,10 +17,9 @@ const isPrime = (num) => {
 };
 
 const generateData = () => {
-  const randomVal = getRandomInt(2);
-  const question = randomVal;
-  const answer = (isPrime(randomVal)) ? 'yes' : 'no';
+  const question = getRandomInt(2, 20);
+  const answer = isPrime(question) ? 'yes' : 'no';
   return [question, answer];
 };
 
-export default () => gameProcess(generateData, gameDescription);
+export default () => processGame(generateData, gameDescription);

@@ -1,15 +1,16 @@
-import { gameProcess, getRandomInt } from '../core';
+import processGame from '../core';
+import getRandomInt from '../utils';
 
 const gameDescription = 'Find the greatest common divisor of given numbers.';
 
-const getGcd = (val1, val2) => ((val2 === 0) ? val1 : getGcd(val2, val1 % val2));
+const getGcd = (a, b) => ((b === 0) ? a : getGcd(b, a % b));
 
 const generateData = () => {
-  const randomVal1 = getRandomInt();
-  const randomVal2 = getRandomInt();
-  const question = `${randomVal1} ${randomVal2}`;
-  const answer = getGcd(randomVal1, randomVal2).toString();
+  const a = getRandomInt();
+  const b = getRandomInt();
+  const question = `${a} ${b}`;
+  const answer = getGcd(a, b).toString();
   return [question, answer];
 };
 
-export default () => gameProcess(generateData, gameDescription);
+export default () => processGame(generateData, gameDescription);

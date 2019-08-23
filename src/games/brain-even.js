@@ -1,8 +1,9 @@
-import { gameProcess, getRandomInt } from '../core';
+import processGame from '../core';
+import getRandomInt from '../utils';
 
 const gameDescription = 'Answer "yes" if number even otherwise answer "no"';
 
-const isEven = num => (num % 2 === 0);
+const isEven = number => number % 2 === 0;
 
 const generateData = () => {
   const question = getRandomInt();
@@ -10,4 +11,4 @@ const generateData = () => {
   return [question.toString(), answer];
 };
 
-export default () => gameProcess(generateData, gameDescription);
+export default () => processGame(generateData, gameDescription);

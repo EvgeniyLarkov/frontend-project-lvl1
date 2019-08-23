@@ -1,20 +1,21 @@
-import { gameProcess, getRandomInt } from '../core';
+import processGame from '../core';
+import getRandomInt from '../utils';
 
 const gameDescription = 'What is the result of the expression?';
 
-const mathSigns = [
+const operations = [
   ['+', (a, b) => a + b],
   ['-', (a, b) => a - b],
   ['*', (a, b) => a * b],
 ];
 
 const generateData = () => {
-  const [sign, operation] = mathSigns[getRandomInt(0, mathSigns.length - 1)];
-  const randomVal1 = getRandomInt();
-  const randomVal2 = getRandomInt();
-  const question = `${randomVal1} ${sign} ${randomVal2}`;
-  const answer = operation(randomVal1, randomVal2).toString();
+  const [sign, operation] = operations[getRandomInt(0, operations.length - 1)];
+  const a = getRandomInt();
+  const b = getRandomInt();
+  const question = `${a} ${sign} ${b}`;
+  const answer = operation(a, b).toString();
   return [question, answer];
 };
 
-export default () => gameProcess(generateData, gameDescription);
+export default () => processGame(generateData, gameDescription);

@@ -1,29 +1,30 @@
-import { gameProcess, getRandomInt } from '../core';
+import processGame from '../core';
+import getRandomInt from '../utils';
 
 const gameDescription = 'What number is missing in the progression?';
-const progLength = 10;
+const progressionLength = 10;
 
-const makeProgression = (plength, pseed, startNumber) => {
-  const iter = (array) => {
-    if (array.length === plength) {
-      return array;
+const makeProgression = (progressionSeed, initialTerm) => {
+  const iter = (progression) => {
+    if (progression.length === progressionLength) {
+      return progression;
     }
-    if (array.length === 0) {
-      return iter([startNumber]);
+    if (progression.length === 0) {
+      return iter([initialTerm]);
     }
-    return iter(array.concat(array[array.length - 1] + pseed));
+    return iter(progression.concat(progression[progression.length - 1] + progressionSeed));
   };
   return iter([]);
 };
 
 const generateData = () => {
-  const progSeed = getRandomInt(1);
-  const startNumber = getRandomInt();
-  const progression = makeProgression(progLength, progSeed, startNumber);
-  const numberPos = getRandomInt(0, progLength - 1);
-  const answer = progression[numberPos];
-  const question = progression.map(val => ((val === answer) ? '..' : val)).join(' ');
+  const progressionSeed = getRandomInt(1, 20);
+  const initialTerm = getRandomInt();
+  const progression = makeProgression(progressionSeed, initialTerm);
+  const answerPosition = getRandomInt(0, progressionLength - 1);
+  const answer = progression[answerPosition];
+  const question = progression.map(value => ((value === answer) ? '..' : value)).join(' ');
   return [question, answer.toString()];
 };
 
-export default () => gameProcess(generateData, gameDescription);
+export default () => processGame(generateData, gameDescription);
