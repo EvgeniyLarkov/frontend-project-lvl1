@@ -5,16 +5,16 @@ const gameDescription = 'What number is missing in the progression?';
 const progressionLength = 10;
 
 const makeProgression = (commonDifference, initialTerm, seriesLength) => {
-  const counter = (progression) => {
+  const iter = (progression) => {
     if (progression.length === seriesLength) {
       return progression;
     }
     if (progression.length === 0) {
-      return counter([initialTerm]);
+      return iter([initialTerm]);
     }
-    return counter(progression.concat(progression[progression.length - 1] + commonDifference));
+    return iter(progression.concat(progression[progression.length - 1] + commonDifference));
   };
-  return counter([]);
+  return iter([]);
 };
 
 const generateData = () => {
