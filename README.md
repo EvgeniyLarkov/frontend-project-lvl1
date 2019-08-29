@@ -1,7 +1,7 @@
 # hexlet brain games
 This package contains 5 different cli-games. This project was made for educational purposes.
 
-[![Code Climate](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/507d42f7adfa52c886bc/maintainability)](https://codeclimate.com/github/EvgeniyLarkov/frontend-project-lvl1/maintainability)
 [![Build Status](https://travis-ci.org/EvgeniyLarkov/frontend-project-lvl1.svg?branch=master)](https://travis-ci.org/EvgeniyLarkov/frontend-project-lvl1)
 ## Package install:
 ```sh
